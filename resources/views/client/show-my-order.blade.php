@@ -51,6 +51,17 @@
                         @endforeach
                     </tbody>
                 </table>
+                <p class="text-danger" style="font-size: 20px">
+                    Tổng tiền: {{ number_format(array_reduce(
+                        $orders->toArray(), 
+                        function($total, $item) {
+                            $total += $item['price'] * $item['qty'];
+                    
+                            return $total;
+                        }, 
+                        0
+                    ),-3,',',',') }} VND
+                </p>
             </div>
         </div>
     </div>

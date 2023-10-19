@@ -52,6 +52,28 @@ class ProductController extends Controller
         ]);
     }
 
+    public function increaseItem($id)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->increaseItemByOne($id);
+        Session::put('cart',$cart);
+        return redirect()->back();
+    }
+
+    public function decreaseItem($id)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->decreaseItemByOne($id);
+        if(count($cart->items) > 0){
+            Session::put('cart',$cart);
+        }else{
+            Session::forget('cart');
+        }
+        return redirect()->back();
+    }
+
     public function deleteItem($id, $color, $size)
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;

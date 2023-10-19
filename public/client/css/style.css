@@ -33,9 +33,7 @@
 html,
 body {
 	height: 100%;
-	font-family: "Cairo", sans-serif;
-	-webkit-font-smoothing: antialiased;
-	font-smoothing: antialiased;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 h1,

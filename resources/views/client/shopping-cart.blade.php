@@ -85,7 +85,9 @@
                                         <td class="shoping__cart__quantity">
                                             <div class="quantity">
                                                 <div class="pro-qty">
+                                                    <a href="{{ route('decrease.item', ['id' => $row['item']['id'] . '_' . $keyColor . '_' . $keySize]) }}"><span class="dec qtybtn">-</span></a>
                                                     <input type="text" value="{{ $row['qty'] }}" onkeyup="changeQty(this.value, {{ $row['item']['id'] }}, {{ $keyColor }}, {{ $keySize }})">
+                                                    <a href="{{ route('increase.item', ['id' => $row['item']['id'] . '_' . $keyColor . '_' . $keySize]) }}"><span class="inc qtybtn">+</span></a>
                                                 </div>
                                             </div>
                                         </td>
