@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Setting;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::useBootstrap();
         $products = DB::select(
             'select p.*,c.name cate_title,s.name supplier_title from products p,categories c, suppliers s
              where p.category_id = c.id and p.supplier_id = s.id and p.qty > 0 and p.status = 1'

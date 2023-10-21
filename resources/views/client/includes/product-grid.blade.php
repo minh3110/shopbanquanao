@@ -8,7 +8,7 @@
                     </ul> 
                 </div>
                 <div class="product__item__text">
-                    <h6><a href="{{ route('client.product.detail', ['id' => $product->id]) }}">{{ $product->name }}</a></h6>
+                    <h6 style="height: 30px;"><a href="{{ route('client.product.detail', ['id' => $product->id]) }}">{{ $product->name }}</a></h6>
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="row">
@@ -36,6 +36,7 @@
                                 </div>
                                 <div class="col-md-12 mt-3">
                                     <h5 class="text-danger">{{ number_format($product->price,-3,',',',') }} VND</h5>
+                                    <a href="javascript:void(0)" onclick="addToCart({{ $product->id }});" class="btn btn-primary mt-3">Thêm giỏ hàng</a>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +45,9 @@
             </div>
         </div>
     @endforeach
-    {!! $products->links() !!}
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        {!! $products->links() !!}
+    </div>
 @else
     <div class="col-lg-4 col-md-6 col-sm-6">
         Không có sản phẩm nào
