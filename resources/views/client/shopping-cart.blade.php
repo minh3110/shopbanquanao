@@ -61,6 +61,8 @@
                                     @php
                                         $keyColor = explode('_', $key)[1];
                                         $keySize = explode('_', $key)[2];
+                                        $color = \App\Models\Color::find($keyColor);
+                                        $size = \App\Models\Size::find($keySize);
                                     @endphp
                                     <tr>
                                         <td class="shoping__cart__item">
@@ -68,15 +70,9 @@
                                             <h5 class="mt-3">{{ $row['item']['name'] }}</h5>
                                         </td>
                                         <td class="shoping__cart__quantity" style="font-weight: normal;">
-                                            @php
-                                                $color = \App\Models\Color::find($keyColor);
-                                            @endphp
                                             <div style="background-color: {{ $color->hex }};width: 50px;height:50px;border-radius: 100%;border: 1px solid black;margin:0 auto;"></div> {{ $color->name }}
                                         </td>
                                         <td class="shoping__cart__quantity" style="font-weight: normal;">
-                                            @php
-                                                $size = \App\Models\Size::find($keySize);
-                                            @endphp
                                             {{ $size->name }}
                                         </td>
                                         <td class="shoping__cart__price">

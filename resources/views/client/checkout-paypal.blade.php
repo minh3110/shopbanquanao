@@ -36,7 +36,7 @@
                 @csrf
 
                 <div class="row">
-                    <div class="col-lg-7 col-md-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="checkout__input">
@@ -64,7 +64,7 @@
                             <input type="text" placeholder="Nhập địa chỉ" class="checkout__input__add" name="address" required>
                         </div>
                     </div>
-                    <div class="col-lg-5 col-md-6">
+                    <div class="col-lg-6 col-md-6">
                         <div class="checkout__order">
                             <h4>Chi tiết đơn hàng</h4>
                             <div class="checkout__order__products">Sản phẩm <span>Tổng tiền</span></div>
@@ -79,7 +79,7 @@
                                         $keyColor = explode('_', $key)[1];
                                         $keySize = explode('_', $key)[2];
                                     @endphp
-                                    <li title="{{ $row['item']['name'] }}">{{ strlen($row['item']['name']) > 10 ? substr($row['item']['name'], 0, 10) . '...' : $row['item']['name'] }} (Màu: {{ \App\Models\Color::find($keyColor)->name }}, Size: {{ \App\Models\Size::find($keySize)->name }}) x {{ $row['qty'] }} <span>{{ number_format($row['price'],-3,',',',') }} VND</span></li>
+                                    <li title="{{ $row['item']['name'] }}">{{ strlen($row['item']['name']) > 20 ? substr($row['item']['name'], 0, 20) . '...' : $row['item']['name'] }} (Màu: {{ \App\Models\Color::find($keyColor)->name }}, Size: {{ \App\Models\Size::find($keySize)->name }}) x {{ $row['qty'] }} <span>{{ number_format($row['price'],-3,',',',') }} VND</span></li>
                                 @endforeach
                             </ul>
                             <div class="checkout__order__total">Thành tiền <span class="total-cart">{{ number_format(Session::get('cart')->totalPrice,-3,',',',') }} VND</span></div>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Color;
+use App\Models\Product;
+use Illuminate\Support\Facades\Session;
 
 class ColorController extends Controller
 {
@@ -85,6 +87,30 @@ class ColorController extends Controller
     public function destroy($id)
     {
         $color = Color::find($id);
+        $cart = session('cart');
+        $products = Product::all();
+        if ($cart && $cart->items) {
+            foreach ($cart->items as $key => $row) {
+                $keyColor = explode('_', $key)[1];
+                if ($id == $keyColor) {
+                    $price = $cart->items[$key]['price'];
+                    $cart->totalPrice -= $price;
+                    unset($cart->items[$key]);
+                    Session::put('cart', $cart);
+                }
+            }
+        }
+
+        foreach ($products as $product) {
+            $colors = array_map('intval', explode(', ', $product->colors));
+            if (in_array($id, $colors)) {
+                $newColors = array_diff($colors, [$id]);
+                if (empty($newColors)) {
+                    return redirect()->route('color.list')->with("invalid","Bạn không thể xóa màu sắc này vì 1 số sản phẩm tối thiểu phải có 1 màu sắc");
+                }
+                Product::where('id', $product->id)->update(['colors' => implode(', ', $newColors)]);
+            }
+        }
         $color->delete();
 
         return redirect()->route('color.list')->with("success","Xóa thành công");
